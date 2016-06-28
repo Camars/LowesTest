@@ -1,65 +1,10 @@
 $(document).ready(function () {
-  loadProducts();
-  $('body').on('click', function () {
-    sumTotal();
-  });
-
   if ($('.in_cart').length === 0) {
     $('.js-subtotal_contents').html('Nothing here yet!');
     $('#js-subtotal').html('$0.00');
   }
 
-  $(function () {
-    $('.js-toggle').click(function () {
-      if ($('.in_cart').length === 0) {
-        $('.js-subtotal_contents').html('Nothing here yet!');
-        $('#js-subtotal').html('$0.00');
-      }
-
-      $(this).text(function (i, text) {
-        if (text === 'Add to Cart') {
-          $(this)
-            .removeClass('btn-primary')
-            .addClass('btn-secondary')
-            .addClass('in_cart');
-          return 'Remove Item';
-        } else {
-          $(this)
-            .removeClass('btn-secondary')
-            .addClass('btn-primary')
-            .removeClass('in_cart');
-          $('.js-subtotal_contents').html('Nothing here yet!');
-          $('#js-subtotal').html('$0.00');
-          return 'Add to Cart';
-        }
-      });
-    });
-  });
-
-  function sumTotal() {
-    var cart = [];
-    var cart_products = [];
-    var subtotal = 0;
-    $('.in_cart').each(function (index) {
-      var item_price = $(this).data('price'); //get the price from the data-attribute.
-      var item_title = $(this).data('title'); //get the title from the data-attribute.
-      // build out the content for the subtotal section.
-      var contents_cart = '<h5 class="c-title">' + item_title + '</h5>' + '<h6 class="c-price c-subtotal__price">$' + item_price + '</h6>';
-      // add the price and contents to each respective array.
-      cart.push(item_price);
-      cart_products.push(contents_cart);
-      var total = 0;
-      $.each(cart, function () {
-        total += this;
-        // add up all the totals.
-      });
-      subtotal = '$' + parseFloat(Math.round((total + 0.00001) * 100) / 100).toFixed(2);
-      $('.js-subtotal_contents').html(cart_products);
-      $('#js-subtotal').html(subtotal);
-    });
-  }
-
-  function loadProducts() {
+  (function ($) {
     $.getJSON('./products.json', function (data) {
       $('#header').html(data.category);
       var products = data.products.map(function (products) {
@@ -85,8 +30,12 @@ $(document).ready(function () {
         $('#products').html(list);
       }
     });
-  }
-}); // end .ready
+  })(jQuery);
+}) // end .ready
+
+.on('click', function () {
+  sumTotal();
+});
 
 $(window).on('load', function () {
   var maxHeight = -1;
@@ -99,4 +48,52 @@ $(window).on('load', function () {
     // make all the divs the same height
     $(this).height(maxHeight);
   });
+
+  $('.js-toggle').on('click', function () {
+    if ($('.in_cart').length === 0) {
+      $('.js-subtotal_contents').html('Nothing here yet!');
+      $('#js-subtotal').html('$0.00');
+    }
+
+    $(this).text(function (i, text) {
+      if (text === 'Add to Cart') {
+        $(this)
+          .removeClass('btn-primary')
+          .addClass('btn-secondary')
+          .addClass('in_cart');
+        return 'Remove Item';
+      } else {
+        $(this)
+          .removeClass('btn-secondary')
+          .addClass('btn-primary')
+          .removeClass('in_cart');
+        $('.js-subtotal_contents').html('Nothing here yet!');
+        $('#js-subtotal').html('$0.00');
+        return 'Add to Cart';
+      }
+    });
+  });
 });
+
+function sumTotal() {
+  var cart = [];
+  var cart_products = [];
+  var subtotal = 0;
+  $('.in_cart').each(function (index) {
+    var item_price = $(this).data('price'); //get the price from the data-attribute.
+    var item_title = $(this).data('title'); //get the title from the data-attribute.
+    // build out the content for the subtotal section.
+    var contents_cart = '<h5 class="c-title">' + item_title + '</h5>' + '<h6 class="c-price c-subtotal__price">$' + item_price + '</h6>';
+    // add the price and contents to each respective array.
+    cart.push(item_price);
+    cart_products.push(contents_cart);
+    var total = 0;
+    $.each(cart, function () {
+      total += this;
+      // add up all the totals.
+    });
+    subtotal = '$' + parseFloat(Math.round((total + 0.00001) * 100) / 100).toFixed(2);
+    $('.js-subtotal_contents').html(cart_products);
+    $('#js-subtotal').html(subtotal);
+  });
+}

@@ -1,0 +1,36 @@
+{
+  "productCount":"6",
+  "category":"Clean Your Living Room",
+  "products":[
+    {
+      "title":"Windex 26-fl oz Glass Cleaner",
+      "price":"2.98",
+      "image":"windex.jpg"
+    },
+    {
+      "title":"Mr. Clean 4-Count Regular All-Purpose Cleaner",
+      "price":"3.58",
+      "image":"magic-eraser.jpg"
+    },
+    {
+      "title":"method 28-fl oz Pink Grapefruit All-Purpose Cleaner",
+      "price":"3.28",
+      "image":"method-all-purpose.jpg"
+    },
+    {
+      "title":"method Wood for Good Daily Clean 28-fl oz Wood Cleaner",
+      "price":"5.98",
+      "image":"method-wood.jpg"
+    },
+    {
+      "title":"Old English Old English Scratch Cover Light Wood Furniture Polish",
+      "price":"4.8",
+      "image":"old-english.jpg"
+    },
+    {
+      "title":"Swiffer Microfiber Telescoping Handle Dusting Wand",
+      "price":"8.97",
+      "image":"swiffer.jpg"
+    }
+  ]
+}

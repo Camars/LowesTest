@@ -15,7 +15,7 @@ That's it!
 
 If you wish to make any changes or to use this for any reason, you may.
 
-Clone it and do `npm install` to install the dependencies and there you go that should be it.
+Clone it and do `npm install` and `bower install` (on the command line) to install the dependencies and there you go that should be it.
 
 My process:
 
